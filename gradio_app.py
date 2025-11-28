@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import logging
 import os
 import tempfile
@@ -59,14 +61,21 @@ def preprocess(input_image, do_remove_background, foreground_ratio):
 
 
 def generate(image, mc_resolution, formats=["obj", "glb"]):
-    scene_codes = model(image, device=device)
-    mesh = model.extract_mesh(scene_codes, True, resolution=mc_resolution)[0]
-    mesh = to_gradio_3d_orientation(mesh)
+    with torch.no_grad():
+        scene_codes = model(image, device=device)
+        mesh = model.extract_mesh(scene_codes, True, resolution=mc_resolution)[0]
+        mesh = to_gradio_3d_orientation(mesh)
+
+    # free intermediate tensors
+    del scene_codes
+    torch.cuda.empty_cache()
+
     rv = []
     for format in formats:
         mesh_path = tempfile.NamedTemporaryFile(suffix=f".{format}", delete=False)
         mesh.export(mesh_path.name)
         rv.append(mesh_path.name)
+
     return rv
 
 

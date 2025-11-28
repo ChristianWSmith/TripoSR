@@ -57,7 +57,7 @@ class TriplaneNeRFRenderer(BaseModule):
             indices2D: torch.Tensor = torch.stack(
                 (x[..., [0, 1]], x[..., [0, 2]], x[..., [1, 2]]),
                 dim=-3,
-            )
+            ).to(triplane.device)
             out: torch.Tensor = F.grid_sample(
                 rearrange(triplane, "Np Cp Hp Wp -> Np Cp Hp Wp", Np=3),
                 rearrange(indices2D, "Np N Nd -> Np () N Nd", Np=3),
