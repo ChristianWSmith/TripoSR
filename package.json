@@ -7,8 +7,8 @@
     "dist": "electron-builder --linux AppImage"
   },
   "build": {
-    "appId": "com.example.gradio",
-    "productName": "GradioApp",
+    "appId": "com.var.triposr",
+    "productName": "TripoSR",
     "directories": {
       "buildResources": "resources"
     },
