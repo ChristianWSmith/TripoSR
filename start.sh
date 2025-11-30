@@ -5,7 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Start Python backend in background
 pushd "${SCRIPT_DIR}" > /dev/null
-pipenv run gradio_app.py &
+ls
+pipenv run "${SCRIPT_DIR}/gradio_app.py" &
 BACKEND_PID=$!
 
 # Wait until server responds

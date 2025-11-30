@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=TripoSR
+Exec=/bin/bash /home/christian/Programming/TripoSR/start.sh
+Icon=triposr
+Comment=TripoSR
+Terminal=false
+Categories=Graphics;
