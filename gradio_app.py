@@ -17,6 +17,9 @@ from tsr.utils import remove_background, resize_foreground, to_gradio_3d_orienta
 
 import argparse
 
+import os
+import gradio as gr
+
 
 if torch.cuda.is_available():
     device = "cuda:0"
@@ -34,6 +37,13 @@ model.renderer.set_chunk_size(8192)
 model.to(device)
 
 rembg_session = rembg.new_session()
+
+
+def kill_server():
+    """Kill the running Gradio backend."""
+    # Optional: print to console
+    print("Kill button pressed! Exiting...")
+    os._exit(0)  # force exit
 
 
 def check_input_image(input_image):
@@ -164,8 +174,7 @@ with gr.Blocks(title="TripoSR") as interface:
         inputs=[processed_image, mc_resolution],
         outputs=[output_model_obj, output_model_glb],
     )
-
-
+    interface.unload(kill_server)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
