@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Start Python backend in background
 pushd "${SCRIPT_DIR}" > /dev/null
+export HF_TOKEN=$(cat HF_TOKEN)
 pipenv run "${SCRIPT_DIR}/gradio_app.py" &
 BACKEND_PID=$!
 

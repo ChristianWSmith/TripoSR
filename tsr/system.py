@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 import trimesh
 from einops import rearrange
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, login
 from omegaconf import OmegaConf
 from PIL import Image
 
@@ -56,6 +56,9 @@ class TSR(BaseModule):
             config_path = os.path.join(pretrained_model_name_or_path, config_name)
             weight_path = os.path.join(pretrained_model_name_or_path, weight_name)
         else:
+            token = os.environ.get("HF_TOKEN")
+            if token:
+                login(token=token)
             config_path = hf_hub_download(
                 repo_id=pretrained_model_name_or_path, filename=config_name
             )

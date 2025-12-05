@@ -165,3 +165,4 @@ outputs/
 
 backend/python-env/
 node_modules/
+HF_TOKEN
