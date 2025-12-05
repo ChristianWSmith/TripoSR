@@ -27,11 +27,11 @@ else:
     device = "cpu"
 
 model = TSR.from_pretrained(
-    # "stabilityai/TripoSR",
-    "stabilityai/stable-fast-3d",
+    "stabilityai/TripoSR",
+    # "stabilityai/stable-fast-3d",
     config_name="config.yaml",
-    # weight_name="model.ckpt",
-    weight_name="model.safetensors",
+    weight_name="model.ckpt",
+    # weight_name="model.safetensors",
 )
 
 # adjust the chunk size to balance between speed and memory usage
